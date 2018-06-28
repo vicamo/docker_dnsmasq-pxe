@@ -1,0 +1,17 @@
+language: bash
+services: docker
+
+branches:
+  only:
+  - master
+
+before_script:
+- IMAGE="${TRAVIS_REPO_SLUG%%/*}/dnsmasq-pxe";
+
+script:
+- travis_retry docker build -t "$IMAGE" .
+
+after_script:
+- docker images
+
+# vim:set et ts=2 sw=2:
